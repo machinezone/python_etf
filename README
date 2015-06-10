@@ -1,0 +1,10 @@
+# Erlang term library implemented in pure Python
+
+to use
+    from erl_terms import decode
+
+    result = decode("[{1, 2}, {3, 4}].")
+
+to run tests:
+
+    python setup.py test
