@@ -4,6 +4,8 @@ import os
 # http://www.eby-sarna.com/pipermail/peak/2010-May/003357.html:
 try:
     import multiprocessing
+    # silence pyflakes
+    assert multiprocessing
 except ImportError:
     pass
 

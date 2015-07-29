@@ -1,8 +1,6 @@
-from sys import version_info
 from unittest import TestCase
 
-from nose import SkipTest
-from nose.tools import eq_, assert_raises, ok_
+from nose.tools import eq_
 
 from erl_terms.erl_terms_core import decode
 
