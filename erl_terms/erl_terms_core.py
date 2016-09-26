@@ -47,7 +47,7 @@ def lex(text):
     string = '"' ~r'(\\\\"|[^"])*' '"'
     binary = "<<" string ">>"
     boolean = "true" / "false"
-    number = ~"[0-9]+\#[0-9a-zA-Z]+" / ~"[0-9]+(\.[0-9]+)?(e\-?[0-9]+)?"
+    number = ~"\-?[0-9]+\#[0-9a-zA-Z]+" / ~"\-?[0-9]+(\.[0-9]+)?(e\-?[0-9]+)?"
     """)
     nocomments = re.sub("(?m)%.*?$", "", text)
     try:
