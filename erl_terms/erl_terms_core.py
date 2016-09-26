@@ -44,7 +44,7 @@ def lex(text):
     tuple = ( _ "{" _ term (_ "," _ term)* _ "}" ) / ( _ "{" _ "}")
     map   = ( _ "#{" _ keyvalue (_ "," _ keyvalue)* _ "}" ) / ( _ "#{" _ "}")
     keyvalue = term _ "=>" _ term _
-    string = '"' ~r'(\\\\"|[^\\\\"])*' '"'
+    string = '"' ~r'(\\\\"|[^"])*' '"'
     binary = "<<" string ">>"
     boolean = "true" / "false"
     number = ~"[0-9]+\#[0-9a-zA-Z]+" / ~"[0-9]+(\.[0-9]+)?(e\-?[0-9]+)?"
