@@ -1,0 +1,13 @@
+language: python
+node_js:
+  - "2.7"
+env:
+ - TASK=check
+
+install: "pip install parsimonious"
+
+script:
+ - case "$TASK" in
+     check) python setup.py test;;
+     *) make -C $TASK check;;
+   esac
