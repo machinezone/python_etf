@@ -10,9 +10,13 @@ class DecodeEverythingTests(TestCase):
     def test_simple_types(self):
         eq_(decode('18.'), [18])
         eq_(decode('18 .'), [18])
+        eq_(decode('-18 .'), [-18])
         eq_(decode('18.  19  . 21.'), [18, 19, 21])
         eq_(decode('18.88.'), [18.88])
         eq_(decode('1.5e-2.'), [0.015])
+        eq_(decode('-1.5e-2.'), [-0.015])
+        eq_(decode('-1.5e+2.'), [-150])
+        eq_(decode('-1.5E2.'), [-150])
         eq_(decode('2#10.'), [2])
         eq_(decode('true.'), [True])
         eq_(decode('false.'), [False])
@@ -36,6 +40,7 @@ class DecodeEverythingTests(TestCase):
     def test_string(self):
         eq_(decode('"ohai".'), [('ohai')])
         eq_(decode(r'"password:\"123\"".'), [('password:"123"')])
+        eq_(decode(r'"\\\\".'), [('\\\\')])
         eq_(decode('"ascii code \e[1;34m".'), [('ascii code \e[1;34m')])
 
     def test_map(self):

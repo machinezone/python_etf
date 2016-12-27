@@ -18,9 +18,7 @@ def transform(ast):
     elif ast.expr_name == "boolean":
         return [ast.text=="true"]
     elif ast.expr_name == "string":
-        return [ast.text[1:-1].replace(r'\"', '"')] # "something"
-    elif ast.expr_name == "binary":
-        return [ast.text[3:-3].replace(r'\"', '"')] # <<"something">>
+        return [ast.text[1:-1].replace(r'\"', '"').replace(r'\\\\', '\\\\')]
     elif ast.expr_name == "atom": 
         return [ast.text]
     else:
@@ -44,10 +42,10 @@ def lex(text):
     tuple = ( _ "{" _ term (_ "," _ term)* _ "}" ) / ( _ "{" _ "}")
     map   = ( _ "#{" _ keyvalue (_ "," _ keyvalue)* _ "}" ) / ( _ "#{" _ "}")
     keyvalue = term _ "=>" _ term _
-    string = '"' ~r'(\\\\"|[^"])*' '"'
+    string = '"' ~r'(\\\\.|[^"])*' '"'
     binary = "<<" string ">>"
     boolean = "true" / "false"
-    number = ~"\-?[0-9]+\#[0-9a-zA-Z]+" / ~"\-?[0-9]+(\.[0-9]+)?(e\-?[0-9]+)?"
+    number = ~"\-?[0-9]+\#[0-9a-zA-Z]+" / ~"\-?[0-9]+(\.[0-9]+)?((e|E)(\-|\+)?[0-9]+)?"
     """)
     nocomments = re.sub("(?m)%.*?$", "", text)
     try:
