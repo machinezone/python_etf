@@ -15,7 +15,7 @@ def read(fname):
         return open(os.path.join(os.path.dirname(__file__), fname)).read()
 setup(
     name='erl_terms',
-    version='0.1.2',
+    version='0.1.3',
     description='Erlang term read library',
     long_description=read('README.md'),
     author='Machine Zone',
