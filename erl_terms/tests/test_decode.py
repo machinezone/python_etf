@@ -62,6 +62,7 @@ class DecodeEverythingTests(TestCase):
     def test_comment(self):
         eq_(decode("% comment"), [])
         eq_(decode("% comment\n"), [])
+        eq_(decode('"%% comment". % comment'), ["%% comment"])
         eq_(decode("% comment\n\n"), []) # check multi-line
         eq_(decode("true. % comment\n true."), [True, True])
         eq_(decode("true. % comment\n"), [True])
