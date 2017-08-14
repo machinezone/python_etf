@@ -22,7 +22,7 @@ setup(
     author_email='info@machinezone.com',
     license='proprietary',
     packages=find_packages(exclude=['ez_setup']),
-    install_requires=['parsimonious'],
+    install_requires=['parsimonious==0.7.0'],
     tests_require=['nose'],
     test_suite='nose.collector',
     url='https://github.com/machinezone/python_etf',
