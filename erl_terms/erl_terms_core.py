@@ -15,6 +15,8 @@ def readint(text):
 def transform(ast):
     if ast.expr_name == "number":
         return [float(ast.text)] if "." in ast.text else [readint(ast.text)]
+    elif ast.expr_name == "char_number":
+        return [chr(readint(ast.text))]
     elif ast.expr_name == "boolean":
         return [ast.text=="true"]
     elif ast.expr_name == "string":
@@ -29,6 +31,8 @@ def transform(ast):
             return [dict(lis)]
         elif ast.expr_name in ["tuple", "keyvalue"]:
             return [tuple(lis)]
+        if ast.expr_name == "binary":
+            return ["".join(lis)]
         return lis
 
 
@@ -43,7 +47,9 @@ def lex(text):
     map   = ( _ "#{" _ keyvalue (_ "," _ keyvalue)* _ "}" ) / ( _ "#{" _ "}")
     keyvalue = term _ "=>" _ term _
     string = '"' ~r'(\\\\.|[^"])*' '"'
-    binary = "<<" string ">>"
+    binary = ( "<<" _ binary_part ( _ "," _ binary_part)* _ ">>") / ("<<" _ ">>")
+    binary_part = string / char_number
+    char_number = ~"[0-9]+"
     boolean = "true" / "false"
     number = ~"\-?[0-9]+\#[0-9a-zA-Z]+" / ~"\-?[0-9]+(\.[0-9]+)?((e|E)(\-|\+)?[0-9]+)?"
     """)

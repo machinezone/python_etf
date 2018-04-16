@@ -43,6 +43,12 @@ class DecodeEverythingTests(TestCase):
         eq_(decode(r'"\\\\".'), [('\\\\')])
         eq_(decode('"ascii code \e[1;34m".'), [('ascii code \e[1;34m')])
 
+    def test_binary(self):
+        eq_(decode('<<>>.'), [('')])
+        eq_(decode('<<"ohai">>.'), [('ohai')])
+        eq_(decode('<<"ohai", "ohai">>.'), [('ohaiohai')])
+        eq_(decode('<<97, 98, 99>>.'), [('abc')])
+
     def test_map(self):
         eq_(decode('#{}.'), [{}])
         eq_(decode('#{ a=>1}.'), [{"a":1}])
