@@ -1,6 +1,7 @@
 import re
 from parsimonious.grammar import Grammar
 import parsimonious.exceptions
+from functools import reduce
 
 class ParseError(Exception):
     pass
