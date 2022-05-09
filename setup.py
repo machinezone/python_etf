@@ -42,5 +42,4 @@ setup(
         'Topic :: Software Development :: Libraries',
         'Topic :: Text Processing :: General'],
     keywords=['parse', 'parser', 'erlang', 'peg', 'grammar', 'language'],
-    use_2to3=version_info >= (3,)
 )
